@@ -28,7 +28,7 @@ jobs:
         run: python api/api.py
 
       - name: Upload output files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: scraped-data
           path: |
