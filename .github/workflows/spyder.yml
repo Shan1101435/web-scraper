@@ -1,4 +1,4 @@
-name: Run Static and API Scraper
+name: Web Scraper Automation
 
 on:
   workflow_dispatch:  # 手動觸發
