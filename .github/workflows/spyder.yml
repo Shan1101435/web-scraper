@@ -1,39 +1,36 @@
-name: Web Scraper Automation
+name: Run Static and API Scraper
 
 on:
-  workflow_dispatch:  # ✅ 手動觸發
-  schedule:            # 🕒 每天台灣時間 8:00 自動執行（UTC+8 = UTC 00:00）
-    - cron: '0 0 * * *'
+  workflow_dispatch:  # 手動觸發
+  schedule:
+    - cron: "0 0 * * *"  # 每天凌晨 0 點自動執行（UTC 時間）
 
 jobs:
   run-scrapers:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: 🐍 Set up Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: 3.10
 
-      - name: 📦 Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+      - name: Install dependencies
+        run: pip install -r requirements.txt || true  # 如果沒有 requirements.txt 就略過錯誤
 
-      - name: 📘 Run static scraper
+      - name: Run static scraper
         run: python static/static.py
 
-      - name: ☁️ Run API scraper
+      - name: Run API scraper
         run: python api/api.py
 
-      - name: 📤 Upload artifacts
+      - name: Upload output files
         uses: actions/upload-artifact@v3
         with:
           name: scraped-data
           path: |
             static/static.json
-            static/static.csv
             api/api.csv
