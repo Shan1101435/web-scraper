@@ -37,8 +37,8 @@ def scrape_books(output_format='json'):
         next_page = soup.select_one("li.next > a")
         url = f"http://books.toscrape.com/catalogue/{next_page['href']}" if next_page else None
 
-    # 設定輸出路徑（輸出到桌面）
-    output_path = os.path.join(os.path.expanduser("~"), "Desktop", f"static.{output_format}")
+    # 設定輸出路徑
+    output_path = os.path.join("static", f"static.{output_format}")
     
     # 根據輸出格式寫入 JSON 檔案
     if output_format == 'json':
