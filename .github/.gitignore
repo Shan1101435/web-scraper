@@ -1,2 +1,12 @@
 "venv/" 
 ".vs/" 
+# 忽略輸出結果
+*.json
+*.csv
+
+# 忽略 VS Code 與 Python 編譯檔案（可選）
+__pycache__/
+*.pyc
+
+# 忽略專案檔案（如果是 Visual Studio 產生的 .pyproj）
+*.pyproj
